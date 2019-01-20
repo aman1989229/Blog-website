@@ -11,39 +11,20 @@
 <hr>
 <div  class="container">
     <div class="row">
-     <div class="row">
+      <div class="row">
+         @foreach($posts as $post)
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
       <img src="/716813.png" alt="...">
       <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <h3>{{substr( $post->body , 0 ,20)}}{{ strlen($post->title)>20?"...." :"" }}</h3>
+        <p>{{substr( $post->body , 0 ,40)}}{{ strlen($post->body)>40?"...." :"" }}</p>
+        <a href="{{url('blog/'.$post->slug)}}" class="btn btn-primary" role="button">Read more</a> 
       </div>
     </div>
   </div>
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="/716813.png" alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="/716813.png" alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
-
-</div>
+    @endforeach
    </div>
+</div>
 </div>
 @endsection

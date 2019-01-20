@@ -2,6 +2,9 @@
 
 @section('title','|CreatePost')
 
+@section('stylesheets')
+{!! Html::style('css/select2.min.css') !!}
+@endsection
 
 @section('content')
 
@@ -11,9 +14,28 @@
 		<h1 style="text-align: center;"> Create New Post</h1>
 		<hr>
 		
-		{!! Form::open(['route' => 'posts.store','data-parsley-validate'=>'']) !!}
+		{!! Form::open(['route' => 'posts.store','data-parsley-validate'=>'']) !!}<!-- here form will open only but when we use model lets check edit.php inside posts-->
            {{Form::label('title', 'Title:')}}
            {{Form::text('title', null,array('class'=>'form-control'))}}
+
+            {{Form::label('slug', 'Slug:')}}
+           {{Form::text('slug', null,array('class'=>'form-control'))}}
+            
+            {{Form::label('category_id','Category:')}}
+           <select class="form-control" name="category_id">
+            <option>select</option>
+                @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+                @endforeach
+              </select>   
+
+              <!-- Using select2.js here to use multiple tag system (use tag[] here because of multiple tags are going to store so we store them into an array)-->
+               {{Form::label('tags','Tag:')}}
+           <select class="form-control select2-multi" name="tags[]" multiple="multiple">
+                @foreach($tags as $tag)
+                <option value="{{$tag->id}}">{{$tag->name}}</option>
+                @endforeach
+              </select>             
 
            {{Form::label('body', 'Post:')}}
             {{Form::textarea('body', null,array('class'=>'form-control'))}}
@@ -23,4 +45,14 @@
 	</div>
 
 </div>
+@endsection
+
+
+@section('scripts')
+
+{!! Html::script('js/select2.min.js') !!}
+
+<script type="text/javascript">
+  $('.select2-multi').select2();  //select2-multi is a class see line 34
+</script>
 @endsection

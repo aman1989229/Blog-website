@@ -42,6 +42,11 @@
                   @endforeach
               </tbody>
             </table>
+            
+            <!--pagination links starts here-->
+            <div class="text-center">
+              {!! $posts->links();!!}
+            </div>
 		</div>
      </div>
 

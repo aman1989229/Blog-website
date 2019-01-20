@@ -15,6 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="{{ Request::is('login')? "active" :"" }}"><a href="/home" style="color: #000000;">Home<span class="sr-only">(current)</span></a></li>
+        <li class="{{ Request::is('blog')? "active" :"" }}"><a href="/blog" style="color: #000000;">Blog<span class="sr-only">(current)</span></a></li>
         <li class="{{ Request::is('about')? "active" :"" }}"><a href="/about"style="color: #000000;">About</a></li>
         <li class="{{ Request::is('contact')? "active" :"" }}"><a href="/contact"style="color: #000000;">Contact Us</a></li>
       </ul>
@@ -34,6 +35,9 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                     <a href="{{url('posts')}}">Posts</a>
+                                     <a href="{{route('categories.index')}}">Categories</a>
+                                     <a href="{{route('tags.index')}}">Tags</a>
                                      
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

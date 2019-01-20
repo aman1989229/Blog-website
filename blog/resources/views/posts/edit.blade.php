@@ -2,6 +2,9 @@
 
 @section('title','|EditPost')
 
+@section('stylesheets')
+{!! Html::style('css/select2.min.css') !!}
+@endsection
 
 @section('content')
 
@@ -10,7 +13,16 @@
 	<div class="col-md-8">
 		 {{Form::label('title', 'Title:')}}
     {{Form::text('title', null,array('class'=>'form-control input-lg'))}}
-    
+ 
+      {{Form::label('slug', 'Slug:')}}
+    {{Form::text('slug', null,array('class'=>'form-control input-lg'))}}
+
+    {{Form::label('category_id','Category:')}}
+    {{Form::select('category_id',$categories,null,['class'=>'form-control'])}}
+
+        {{Form::label('tags','Tag:')}}
+          {{Form::select('tags[]',$tags,null,['class'=>'form-control','multiple'=>'multiple'])}} 
+
     {{Form::label('body', 'Post:'),array('style'=>'margin-top:20px;')}}
      {{Form::textarea('body', null,array('class'=>'form-control input-lg'))}}
      </div>
@@ -39,4 +51,9 @@
 {!!Form::close()!!}
 </div>
 
+@endsection
+
+@section('scripts')
+
+{!! Html::script('js/select2.min.js') !!}
 @endsection
