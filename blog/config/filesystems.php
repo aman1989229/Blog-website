@@ -45,7 +45,10 @@ return [
 
         'local' => [
             'driver' => 'local',
+            'root' => public_path('images/'),  
+            /*here we change root  by default it is 
             'root' => storage_path('app'),
+            */
         ],
 
         'public' => [

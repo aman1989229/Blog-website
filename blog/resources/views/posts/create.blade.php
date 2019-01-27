@@ -4,6 +4,14 @@
 
 @section('stylesheets')
 {!! Html::style('css/select2.min.css') !!}
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+
+
+<script>
+    tinymce.init({
+     selector:'textarea'
+      });
+</script>
 @endsection
 
 @section('content')
@@ -14,7 +22,8 @@
 		<h1 style="text-align: center;"> Create New Post</h1>
 		<hr>
 		
-		{!! Form::open(['route' => 'posts.store','data-parsley-validate'=>'']) !!}<!-- here form will open only but when we use model lets check edit.php inside posts-->
+		{!! Form::open(['route' => 'posts.store','data-parsley-validate'=>'','files'=>true]) !!}<!-- here form will open only but when we use model lets check edit.php inside posts
+       upload a image set (files = true) -->
            {{Form::label('title', 'Title:')}}
            {{Form::text('title', null,array('class'=>'form-control'))}}
 
@@ -36,6 +45,9 @@
                 <option value="{{$tag->id}}">{{$tag->name}}</option>
                 @endforeach
               </select>             
+
+               {{Form::label('featured_image','Upload image')}}
+               {{Form::file('featured_image')}}
 
            {{Form::label('body', 'Post:')}}
             {{Form::textarea('body', null,array('class'=>'form-control'))}}

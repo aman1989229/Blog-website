@@ -6,8 +6,9 @@
 
 <div class="row">
 	<div class="col-md-8">
+    <img src="{{asset('images/'. $post->image)}}" height="400" width="800" >
     <h1>{{ $post->title }}</h1>
-     <p class="lead">{{ $post->body }}</p>
+     <p class="lead">{!! $post->body !!}</p>
      <hr>
 
      <div class="tags">
@@ -16,6 +17,33 @@
     @endforeach
      </div>
 
+   <!--  all comments comes here-->
+<div class="backend-comments" style="margin-top: 50px;">
+  <h3>Comments <small>{{$post->comments()->count()}}</small></h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Comment</th>
+      <th width="70px"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @foreach($post->comments as $comment)
+    <tr>
+      <td>{{$comment->name}}</td>
+      <td>{{$comment->email}}</td>
+      <td>{{substr( $comment->comment , 0 ,30 ) }}{{ strlen($comment->comment)>30 ?"...." :""}}</td>
+      <td><a href="{{route('comments.edit',$comment->id)}}" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a href="{{route('comments.delete',$comment->id)}}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+
+</div>
      </div>
 
     <div class="col-md-4">
@@ -52,4 +80,5 @@
     	</div>
     </div> 
 </div>
+
 @endsection

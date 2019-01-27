@@ -4,12 +4,20 @@
 
 @section('stylesheets')
 {!! Html::style('css/select2.min.css') !!}
+ <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+
+
+<script>
+    tinymce.init({
+     selector:'textarea'
+      });
+</script>
 @endsection
 
 @section('content')
 
 <div class="row">
-	{!!Form::model($post,['route'=>['posts.update',$post->id],'method'=>'PUT'])!!}
+	{!!Form::model($post,['route'=>['posts.update',$post->id],'method'=>'PUT','files'=>true])!!}
 	<div class="col-md-8">
 		 {{Form::label('title', 'Title:')}}
     {{Form::text('title', null,array('class'=>'form-control input-lg'))}}
@@ -22,6 +30,8 @@
 
         {{Form::label('tags','Tag:')}}
           {{Form::select('tags[]',$tags,null,['class'=>'form-control','multiple'=>'multiple'])}} 
+        {{Form::label('featured_image','Upload Image:')}}  
+        {{Form::file('featured_image')}}
 
     {{Form::label('body', 'Post:'),array('style'=>'margin-top:20px;')}}
      {{Form::textarea('body', null,array('class'=>'form-control input-lg'))}}
@@ -56,4 +66,5 @@
 @section('scripts')
 
 {!! Html::script('js/select2.min.js') !!}
+
 @endsection

@@ -4,28 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Tag;
-use App\Post;
-use Session;
-class TagController extends Controller
+class Comment extends Controller
 {
-
-    /* for authhenticate or only logged user*/
-     public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-        $tags=Tag::all();
-
-        return view('tags.index')->withTags($tags);
+    {   
+        $comments= Comment::all();
+        return view('comments.index')->withComments($comments);
     }
 
     /**
@@ -47,19 +36,6 @@ class TagController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request,array(
-           'name'=>'required|max:255',
-           
-        ));
-
-        $tag = new Tag;
-
-        $tag->name=$request->name;
-          $tag->save();
-
-          Session::Flash('success','new tag successfully added');
-
-        return redirect()->route('tags.index');
     }
 
     /**
@@ -71,10 +47,6 @@ class TagController extends Controller
     public function show($id)
     {
         //
-        $tag=Tag::find($id);
-      
-
-        return view('tags.show')->withTag($tag);
     }
 
     /**
@@ -86,11 +58,6 @@ class TagController extends Controller
     public function edit($id)
     {
         //
-       
-
-        $tag=Tag::find($id);
-
-        return view('tags.edit')->withTag($tag);
     }
 
     /**
@@ -103,18 +70,6 @@ class TagController extends Controller
     public function update(Request $request, $id)
     {
         //
-             $this->validate($request,array(
-           'name'=>'required|max:255',
-           
-        ));
-
-        $tag=Tag::find($id);
-
-        $tag->name=$request->name;
-          $tag->save();
-
-           Session::flash('success','The tag has been changed successsfully!!!');
-    return redirect()->route('tags.show',$tag->id);
     }
 
     /**
@@ -126,12 +81,5 @@ class TagController extends Controller
     public function destroy($id)
     {
         //
-        $tag=Tag::find($id);
-
-        $tag->posts()->detach();
-
-        $tag->delete();
-     Session::flash('success','The tag has been deleted successsfully!!!');
-       return redirect()->route('tags.index');
     }
 }
